@@ -2,7 +2,7 @@ import React from 'react'
 import send from './send.png'
 import logo from './cl.png'
 import sorry from './sorry.gif'
-import { useState } from 'react';
+import { useState , useEffect } from 'react';
 // import SyntaxHighlighter from 'react-syntax-highlighter';
 // import { dark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 // import { docco } from 'react-syntax-highlighter/dist/esm/styles/hljs';
@@ -14,7 +14,8 @@ const Word = () => {
   const [spin, setspin] = useState('logounrotate')
 
 
-  const domain = 'http://localhost:8000/'
+  // const domain = 'http://localhost:8000/'
+  const domain = 'https://plutoclarify.pythonanywhere.com/'
   const [copy,setcopy] = useState('Copy')
   const handlecopy = () =>{
   setcopy('Copied!')
@@ -90,14 +91,15 @@ const final_res = res.map(
     handlecopy()
     navigator.clipboard.writeText(obj.value)
     }} className={ copy == 'Copy' ? 'active:bg-green-500 float-right bg-cyan-400 text-gray-900 p-1 rounded-md border-2 border-cyan-900 font-bold hover:bg-white hover:text-black' : 'active:bg-green-500 float-right bg-green-400 text-gray-900 p-1 rounded-md border-2 border-cyan-900 font-bold hover:bg-white hover:text-black'  }>{copy}</button>}
-  {obj.value}
+  {/* {setFullText(obj.value)} */}
+  { obj.value }
   </div>
   <br></br>
 
   {/* extra */}
   {obj.extra != null ? <div className='text-md text-cyan-400'>
   {/* {obj.extra} */}
-  <h1 className='mb-5 mt-0 text-lg font-bold'>You can search about these things also...<br></br></h1>
+  <h1 className='mb-5 mt-0 text-lg font-bold'>You can search about these lines also...<br></br></h1>
   {obj.extra.map(item =>{
     return(
       <h1 id='content' onClick={()=>{
@@ -123,7 +125,7 @@ const final_res = res.map(
     {/* logo */}
     <div className='fixed top-[0%] bg-slate-900 w-full flex justify-center items-center'>
     <img src={logo} className={spin == 'logounrotate' ? 'logounrotate w-14 md:w-16 mt-0 md:mt-3' : 'logorotate w-14 md:w-16 mt-0 md:mt-3'}/>
-    <h1 className='font-bold text-center mb-1 mr-2 mt-0 md:m-0 md:mt-2 text-2xl md:text-4xl text-white'>PlutoClarify</h1>
+    <h1 className='font-bold text-center mb-1 mr-2 mt-1 md:m-0 md:mt-2 text-2xl md:text-4xl text-white'>PlutoClarify</h1>
     </div>
     {/* <div className='grid md:grid-cols-2 p-3'> */}
     <h1 className='font-bold md:text-lg mx-10 mt-2 rounded-xl p-3 text-center text-gray-400 bg-slate-900'>Type any single word or nouns and know information</h1>
