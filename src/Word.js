@@ -17,7 +17,7 @@ const Word = () => {
 
   // typing logo 
   const [logotext, setText] = useState("")
-const [fullText, setFullText] = useState('PlutoClarify')
+const [fullText, setFullText] = useState('PlutoKnows')
 const [index, setIndex] = useState(0)
 
 useEffect(() => {
