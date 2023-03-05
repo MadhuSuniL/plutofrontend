@@ -17,7 +17,7 @@ const Word = () => {
 
   // typing logo 
   const [logotext, setText] = useState("")
-const [fullText, setFullText] = useState('PlutoKnows')
+const [fullText, setFullText] = useState('PlutoClarify')
 const [index, setIndex] = useState(0)
 
 useEffect(() => {
@@ -67,11 +67,6 @@ useEffect(() => {
 }, [index3])
 
 
-    
-
-
-
-
   // const domain = 'http://localhost:8000/'
   const domain = 'https://plutoclarify.pythonanywhere.com/'
   const [copy,setcopy] = useState('Copy')
@@ -87,6 +82,7 @@ useEffect(() => {
 
  const handlevalue = event =>{
     setinput(event.target.value)
+    console.log(input);
  }
 
  const handlepaste = item =>{
@@ -127,8 +123,41 @@ const handleinput = () => {
 }
 
 
+useEffect(() => {
+  const listener = (event) => {
+      if (event.code === "Enter") {
+        setspin('logorotate')
+        fetch(`${domain}get_res`,{
+        method:'POST',
+        headers:{
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+        },
+        body:JSON.stringify({
+        key:document.getElementById('input').value
+    })
+  })
+      .then(res => res.json())
+      .then(data => {
+        res.push(data)
+        setspin('logounrotate')
+        document.getElementById('input').value = ''
+        if(document.querySelectorAll('#img').length != 1){
+          const element = document.querySelectorAll('#img')[document.querySelectorAll('#img').length - 1]
+          element.scrollIntoView(true)
+        }
+  })
+  
+      }
+      else{
 
-// typing valu
+      }
+  };
+  document.addEventListener("keypress", listener);
+}, []);
+
+
+// typing value
 const final_res = res.map(
     obj => {
   return  (<div className='border-[0px] rounded-md text-white font-mono mx-4 mb-20 md:mx-auto p-5 border-white md:w-[70%]'>
@@ -175,7 +204,7 @@ const final_res = res.map(
   {obj.extra.map(item =>{
     return(
       <h1 id='content' onClick={()=>{
-        handlepaste(item)        
+        handlepaste(item)
       }} className='bg-slate-900 cursor-pointer shadow-xl rounded-md shadow-cyan-400 active:shadow-black text-gray-200 text-center my-2 p-2'>{item}</h1>
     )
   })      
