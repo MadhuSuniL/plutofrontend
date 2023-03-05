@@ -13,6 +13,62 @@ const Word = () => {
 
   const [spin, setspin] = useState('logounrotate')
 
+  // typing logo 
+  const [logotext, setText] = useState("")
+const [fullText, setFullText] = useState('PlutoClarify')
+const [index, setIndex] = useState(0)
+
+useEffect(() => {
+  if (index < fullText.length) {
+    setTimeout(() => {
+      setText(logotext + fullText[index])
+      setIndex(index + 1)
+    }, 100)
+  }
+}, [index])
+
+
+const [logotext2, setText2] = useState("")
+const [fullText2, setFullText2] = useState('Type any single word or nouns and know information')
+const [index2, setIndex2] = useState(0)
+const [timetype , settimetype] = useState(2000)
+
+
+useEffect(() => {
+  setTimeout(function(){
+    if (index2 < fullText2.length) {
+      setTimeout(() => {
+        setText2(logotext2 + fullText2[index2])
+        setIndex2(index2 + 1)
+      }, 60)
+    }
+    settimetype(0)
+  },timetype)
+}, [index2])
+
+const [logotext3, setText3] = useState("")
+const [fullText3, setFullText3] = useState('MadhuSuniL')
+const [index3, setIndex3] = useState(0)
+const [timetype2 , settimetype2] = useState(6300)
+
+
+useEffect(() => {
+  setTimeout(function(){
+    if (index3 < fullText3.length) {
+      setTimeout(() => {
+        setText3(logotext3 + fullText3[index3])
+        setIndex3(index3 + 1)
+      }, 80)
+    }
+    settimetype2(0)
+  },timetype2)
+}, [index3])
+
+
+    
+
+
+
 
   // const domain = 'http://localhost:8000/'
   const domain = 'https://plutoclarify.pythonanywhere.com/'
@@ -40,8 +96,8 @@ const Word = () => {
 
 //  res state
 
-const [res , setres] = useState([])
-
+const [res , setres] = useState([])//{key:'',value:''}
+const [lastindex,setlastindext] = useState(0)
 
 const handleinput = () => {
   setspin('logorotate')
@@ -64,10 +120,23 @@ const handleinput = () => {
       const element = document.querySelectorAll('#img')[document.querySelectorAll('#img').length - 1]
       element.scrollIntoView(true)
     }
-
   })
   
 }
+
+
+
+// typing value
+
+
+
+
+
+
+
+
+
+
 
 const final_res = res.map(
     obj => {
@@ -91,7 +160,7 @@ const final_res = res.map(
     handlecopy()
     navigator.clipboard.writeText(obj.value)
     }} className={ copy == 'Copy' ? 'active:bg-green-500 mx-2 text-sm float-right bg-cyan-400 text-gray-100 p-1 rounded-md border-2 border-cyan-900 font-bold hover:bg-white hover:text-black' : 'active:bg-green-500 float-right bg-green-400 text-gray-900 p-1 rounded-md border-2 border-cyan-900 font-bold hover:bg-white hover:text-black'  }>{copy}</button>}
-  {/* {setFullText(obj.value)} */}
+  {/* <p className='text-justify'>{ valuetext }</p> */}
   <p className='text-justify'>{ obj.value }</p>
   </div>
   <br></br>
@@ -125,16 +194,16 @@ const final_res = res.map(
     {/* logo */}
     <div className='fixed top-[0%] bg-slate-900 w-full flex justify-center items-center'>
     <img src={logo} className={spin == 'logounrotate' ? 'logounrotate w-14 md:w-16 mt-0 md:mt-3' : 'logorotate w-14 md:w-16 mt-0 md:mt-3'}/>
-    <h1 className='font-bold text-center mb-1 mr-2 mt-1 md:m-0 md:mt-2 text-2xl md:text-4xl text-white'>PlutoClarify</h1>
+    <h1 className='font-bold text-center mb-1 mr-2 mt-1 md:m-0 md:mt-2 text-2xl md:text-4xl text-white'>{logotext}</h1>
     </div>
     {/* <div className='grid md:grid-cols-2 p-3'> */}
-    <h1 className='font-bold md:text-lg mx-10 mt-2 rounded-xl p-3 text-center text-gray-400 bg-slate-900'>Type any single word or nouns and know information</h1>
+    <h1 className='font-bold md:text-lg mx-10 mt-2 rounded-xl p-3 text-center text-gray-400 bg-slate-900'>{logotext2}</h1>
     {/* <h1 className='font-bold md:text-lg mx-10 mt-2 text-center rounded-xl p-3 text-gray-400 bg-slate-900'>Ask any question related to python.</h1> */}
     {/* </div> */}
     {/* typing */}
     <div className='bg-black fixed top-[90%] h-44 left-[0%] md:left-[0%] w-[100%] md:w-[100%]'>   
         <input onChange={handlevalue} id='input' className='fixed pr-20 top-[90%] left-[2%] md:left-[15%] w-[93%] md:w-[70%] rounded-xl h-10 text-xl mx-1 pl-2 bg-slate-900 text-gray-500 border-2 border-white' type="text"/><button onClick={handleinput}> <img src={send} className='w-10 fixed top-[90.5%] left-[83%]  md:top-[90.5%] md:left-[82%]'/> </button>
-        <h1 className='text-white fixed top-[96%] font-mono text-[13px] left-[31%] md:left-[46.7%] m-1 w-[93%] md:w-[70%]'>Powerd by <b className='text-cyan-600 text-md'>MadhuSunil</b></h1>
+        <h1 className='text-white fixed top-[96%] font-mono text-[13px] left-[31%] md:left-[46.7%] m-1 w-[93%] md:w-[70%]'>Powerd by <b className='text-cyan-600 text-md'>{logotext3}</b></h1>
     </div>
 
     {final_res}
