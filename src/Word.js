@@ -1,4 +1,4 @@
-import Typewriter from "typewriter-effect";
+// import Typewriter from "typewriter-effect";
 import React from 'react'
 import send from './sentt.png'
 import logo from './cl.png'
