@@ -31,7 +31,7 @@ useEffect(() => {
 
 
 const [logotext2, setText2] = useState("")
-const [fullText2, setFullText2] = useState('Welcome to Your Site Name! Our intelligent system can provide you with information on any single word or noun. Simply enter the word you want to know more about')
+const [fullText2, setFullText2] = useState('Welcome ! My intelligent system can provide you with information on any single word or noun. Simply enter the word you want to know more about')
 const [index2, setIndex2] = useState(0)
 const [timetype , settimetype] = useState(2000)
 
