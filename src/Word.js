@@ -31,7 +31,7 @@ useEffect(() => {
 
 
 const [logotext2, setText2] = useState("")
-const [fullText2, setFullText2] = useState('Type any single word or nouns and know information')
+const [fullText2, setFullText2] = useState('Welcome to Your Site Name! Our intelligent system can provide you with information on any single word or noun. Simply enter the word you want to know more about')
 const [index2, setIndex2] = useState(0)
 const [timetype , settimetype] = useState(2000)
 
@@ -42,7 +42,7 @@ useEffect(() => {
       setTimeout(() => {
         setText2(logotext2 + fullText2[index2])
         setIndex2(index2 + 1)
-      }, 60)
+      }, 30)
     }
     settimetype(0)
   },timetype)
@@ -192,7 +192,7 @@ const final_res = res.map(
 	.start();
 	}}
 	/> */}
-  <Typing string={obj.value} speed={40} pipe = {true} late={0} />
+  <Typing string={obj.value} speed={10} pipe = {true} late={0} />
   {/* <p className='text-justify'>{ obj.value }</p> */}
   </div>
   <br></br>
