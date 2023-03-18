@@ -17,7 +17,7 @@ const Word = () => {
 
   // typing logo 
   const [logotext, setText] = useState("")
-const [fullText, setFullText] = useState('PlutoClarify')
+const [fullText, setFullText] = useState('PlutoKnows')
 const [index, setIndex] = useState(0)
 
 useEffect(() => {
@@ -234,7 +234,7 @@ const final_res = res.map(
     {/* </div> */}
     {/* typing */}
     <div className='bg-black fixed top-[90%] h-44 left-[0%] md:left-[0%] w-[100%] md:w-[100%]'>   
-        <input onChange={handlevalue} placeholder={'   Search.... "Hyderbad City"'} id='input' className='fixed pr-20 top-[90%] left-[2%] md:left-[15%] w-[93%] md:w-[70%] rounded-xl h-10 text-xl mx-1 pl-2 bg-slate-900 text-gray-500 border-2 border-white' type="text"/><button onClick={handleinput}> <img src={send} className='w-7 m-1 ml-2 md:w-7 fixed top-[90.5%] left-[83%]  md:top-[90.5%] md:left-[82%]'/> </button>
+        <input onChange={handlevalue} placeholder={'   Search.... "United States"'} id='input' className='fixed pr-20 top-[90%] left-[2%] md:left-[15%] w-[93%] md:w-[70%] rounded-xl h-10 text-xl mx-1 pl-2 bg-slate-900 text-gray-500 border-2 border-white' type="text"/><button onClick={handleinput}> <img src={send} className='w-7 m-1 ml-2 md:w-7 fixed top-[90.5%] left-[83%]  md:top-[90.5%] md:left-[82%]'/> </button>
         <h1 className='text-white fixed top-[96%] font-mono text-[13px] left-[31%] md:left-[46.7%] m-1 w-[93%] md:w-[70%]'><b><Typing string={'Powerd by'} speed ={40} pipe = {false} extratext={' '+logotext3} late={6000}/></b></h1>
     </div>
 
