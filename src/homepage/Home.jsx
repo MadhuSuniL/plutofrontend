@@ -135,7 +135,7 @@ const Home = () => {
               setTimeout(function(){
                 return nav('/pluto')
               },600)
-            }} className='active:scale-0 hover:scale-0 md:hover:scale-95 duration-1000 cursor-pointer border-2 border-cyan-400 rounded-[50%] w-72 h-72 md:w-96 md:h-96 text-center mt-1 py-10 md:py-20 text-3xl font-bold animate-pulse flex items-center flex-col'><img src={aibot} className='md:w-36 w-20 animate-bounce mt-10 md:mt-1'/><div className='animate-bounce text-[#7fffd4]'>Tap to ask!</div><div className='animate-bounce text-cyan-400 text-sm mt-0'>Questions</div></div>
+            }} className='active:scale-0 hover:scale-0 md:hover:scale-95 duration-1000 cursor-pointer border-2 border-cyan-400 rounded-[50%] w-72 h-72 md:w-96 md:h-96 text-center mt-1 py-10 md:py-20 text-3xl font-bold animate-pulse flex items-center flex-col'><img src={aibot} className='md:w-36 w-20 animate-bounce mt-10 md:mt-1'/><div className='animate-bounce text-[#7fffd4]'>Tap to chat!</div><div className='animate-bounce text-cyan-400 text-sm mt-0'>Questions</div></div>
             </center>
             <h1 className='p-3 text-center text-3xl m-3 font-bold text-cyan-400'>Hai I am Pluto.. </h1>
             <h1 className='text-center text-md font-bold m-3 mx-0 mt-0 text-yellow-400'><i>{quotes[Math.floor(Math.random() * 74)]}</i></h1>

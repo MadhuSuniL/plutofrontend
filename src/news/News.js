@@ -1,6 +1,6 @@
 import React from 'react'
 import send from '../images/sentt.png'
-import logo from '../images/cl.png'
+import logo from '../images/cl2.png'
 import lang1 from '../images/lang.png'
 import lang2 from '../images/lang2.png'
 import sorry from '../images/sorry.gif'
@@ -18,50 +18,53 @@ const Word = () => {
   const [loading,setLoading] = useState(true)
 
   
-const handleinput = async ()=>{
-  setLang(false)
-    setLoading(true)
-    setspin('logorotate')
-  var url = ''
-  const apiKey = '1d15e32ffdac4d8ab86a7c68ac0024cd';
-  if (type == 'latest'){
-     url = 'https://newsapi.org/v2/everything?q=news&apiKey=' + apiKey;
-  }
-  else{
-     url = 'https://newsapi.org/v2/top-headlines?category='+type+'&apiKey=' + apiKey;
-  }
+// const handleinput = async ()=>{
+//   setLang(false)
+//     setLoading(true)
+//     setspin('logorotate')
+//   var url = ''
+//   const apiKey = '1d15e32ffdac4d8ab86a7c68ac0024cd';
+//   if (type == 'latest'){
+//      url = 'https://newsapi.org/v2/everything?q=news&apiKey=' + apiKey;
+//   }
+//   else{
+//      url = 'https://newsapi.org/v2/top-headlines?category='+type+'&apiKey=' + apiKey;
+//   }
   
-await fetch(url)
-  .then(response => response.json())
-  .then(data => {
-    setres(data['articles'])
-        setspin('logounrotate')
-        setLoading(false)
+// await fetch(url)
+//   .then(response => response.json())
+//   .then(data => {
+//     setres(data['articles'])
+//         setspin('logounrotate')
+//         setLoading(false)
         
-  })
-  .catch(error => console.log(error));
-}
+//   })
+//   .catch(error => console.log(error));
+// }
   
 
-// const handleinput = async () => {
-//   setLang(false)
-//   setLoading(true)
-//   setspin('logorotate')
-//   await fetch(`${domain}get_news/`,{
-//     method:'GET',
-//     headers:{
-//       'Content-Type': 'application/json',
-//       'Accept': 'application/json'
-//     }
-//   })
-//   .then(res => res.json())
-//   .then(data => {
-//     setres(data)
-//     setspin('logounrotate')
-//     setLoading(false)
+const handleinput = async () => {
+  setLang(false)
+  setLoading(true)
+  setspin('logorotate')
+  await fetch(`${domain}get_news/`,{
+    method:'POST',
+    headers:{
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    },
+    body:JSON.stringify({
+      type
+    })
+  })
+  .then(res => res.json())
+  .then(data => {
+    setres(data)
+    setspin('logounrotate')
+    setLoading(false)
     
-// }) 
-// }
+}) 
+}
   
   
   
@@ -181,9 +184,9 @@ const final_res = res.map(
   navigator.clipboard.writeText(obj.content)
   }} className={ copy == 'Copy' ? 'hidden active:bg-green-500 float-right bg-cyan-400 text-gray-900 p-1 rounded-md border-2 border-cyan-900 font-bold hover:bg-white hover:text-black' : 'active:bg-green-500 float-right mt-10 bg-green-400 text-gray-900 p-1 rounded-md border-2 border-cyan-900 font-bold hover:bg-white hover:text-black'  }>{copy}</button> : <button onClick={()=>{
     handlecopy()
-    navigator.clipboard.writeText(obj.content)
+    navigator.clipboard.writeText(obj.description)
     }} className={ copy == 'Copy' ? 'active:bg-green-500 mx-2 mt-4 text-sm float-right bg-cyan-400 text-gray-100 p-1 rounded-md border-2 border-cyan-900 font-bold hover:bg-white hover:text-black' : 'active:bg-green-500 float-right bg-green-400 text-gray-900 p-1 rounded-md border-2 border-cyan-900 m-4 font-bold hover:bg-white hover:text-black'  }>{copy}</button>}
-    <div className='text-left text-[13px]' >{obj.content ? <label dangerouslySetInnerHTML={{__html:obj.content}} /> : <label className='text-red-500' dangerouslySetInnerHTML={{__html:'Content is not available please click on read more to know more informantion about it..'}} />}</div>
+    <div className='text-left text-[13px]' >{obj.content ? <label dangerouslySetInnerHTML={{__html:obj.description}} /> : <label className='text-red-500' dangerouslySetInnerHTML={{__html:'Content is not available please click on read more to know more informantion about it..'}} />}</div>
   <a href={obj.url} target='blank_' className='text-sm float-right text-cyan-400'>Read more..</a>
   </div>
   <br></br>
