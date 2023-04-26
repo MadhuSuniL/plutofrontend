@@ -6,38 +6,62 @@ import lang2 from '../images/lang2.png'
 import sorry from '../images/sorry.gif'
 import { useState , useEffect } from 'react';
 import Typing from "../mainpage/components/Typing";
-
-
-
+import Navbar from '../Navbar'
+import { useParams } from 'react-router-dom'
 const Word = () => {
 
+  const {type} = useParams()
   const [spin, setspin] = useState('logounrotate')
   const [lang, setLang] = useState(false)
   const [langValue, setLangValue] = useState('en')
   const [newsIndex,setNewsIndex] = useState(0)  
   const [loading,setLoading] = useState(true)
+
   
-  
-  
-const handleinput = async () => {
+const handleinput = async ()=>{
   setLang(false)
-  setLoading(true)
-  setspin('logorotate')
-  await fetch(`${domain}get_news/`,{
-    method:'GET',
-    headers:{
-      'Content-Type': 'application/json',
-      'Accept': 'application/json'
-    }
-  })
-  .then(res => res.json())
+    setLoading(true)
+    setspin('logorotate')
+  var url = ''
+  const apiKey = '1d15e32ffdac4d8ab86a7c68ac0024cd';
+  if (type == 'latest'){
+     url = 'https://newsapi.org/v2/everything?q=news&apiKey=' + apiKey;
+  }
+  else{
+     url = 'https://newsapi.org/v2/top-headlines?category='+type+'&apiKey=' + apiKey;
+  }
+  
+await fetch(url)
+  .then(response => response.json())
   .then(data => {
-    setres(data)
-    setspin('logounrotate')
-    setLoading(false)
-    
-}) 
+    setres(data['articles'])
+        setspin('logounrotate')
+        setLoading(false)
+        
+  })
+  .catch(error => console.log(error));
 }
+  
+
+// const handleinput = async () => {
+//   setLang(false)
+//   setLoading(true)
+//   setspin('logorotate')
+//   await fetch(`${domain}get_news/`,{
+//     method:'GET',
+//     headers:{
+//       'Content-Type': 'application/json',
+//       'Accept': 'application/json'
+//     }
+//   })
+//   .then(res => res.json())
+//   .then(data => {
+//     setres(data)
+//     setspin('logounrotate')
+//     setLoading(false)
+    
+// }) 
+// }
   
   
   
@@ -65,7 +89,7 @@ useEffect(() => {
 
 
 const [logotext2, setText2] = useState("")
-const [fullText2, setFullText2] = useState('Welcome ! Today world top news..')
+const [fullText2, setFullText2] = useState('Welcome ! Today '+type+' top news..')
 const [index2, setIndex2] = useState(0)
 const [timetype , settimetype] = useState(1000)
 
@@ -105,6 +129,7 @@ useEffect(() => {
 
 
   const domain = 'http://localhost:8000/'
+  // const domain = 'http://localhost:8000/'
   // const domain = 'https://plutoclarify.pythonanywhere.com/'
   const [copy,setcopy] = useState('Copy')
   const handlecopy = () =>{
@@ -138,14 +163,14 @@ const [res , setres] = useState([])//{key:'',value:''}
 
 const final_res = res.map(
     obj => {
-  return  (<div className='border-[0px] rounded-md text-white font-mono mx-4 mb-20 md:mx-auto p-2 border-white md:w-[70%]'>
+  return  (<div className='border-[0px] rounded-md text-white font-mono mx-4 mb-5 md:mx-auto p-2 border-white md:w-[70%]'>
   {/* images */}
   <div className='text-md'>
-  {obj.img != 'none' ? <img id='img' alt={"?"+obj.head} src={obj.img} className='w-77 m-2 mb-5 rounded-md border-2 border-white mx-auto'/> : <img id='img' src={sorry} className='w-77 m-2 mb-5 rounded-md border-2 border-white mx-auto'/>}
+  {obj.urlToImage ? <img id='img' alt={"?"+obj.title} src={obj.urlToImage} className='w-77 m-2 mb-5 rounded-md border-2 border-white mx-auto'/> : <img id='img' src={'https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found-1-scaled-1150x647.png'} className='w-77 m-2 mb-5 rounded-md border-2 border-white mx-auto'/>}
   </div>
   {/* question */}
   <div>
-  <h1 id='key' className='font-bold mb-3 text-cyan-400 text-lg'>{obj.head}</h1>
+  <h1 id='key' className='font-bold mb-3 text-cyan-400 text-lg'>{obj.title}</h1>
   <hr/>
   </div>
   <br></br>
@@ -153,12 +178,13 @@ const final_res = res.map(
   <div className='text-md'>
     {obj.value == "I am sorry i could't found the result. Please check spellings or try in another way(with new words)." ? <button disabled onClick={()=>{
   handlecopy()
-  navigator.clipboard.writeText(obj.cont)
+  navigator.clipboard.writeText(obj.content)
   }} className={ copy == 'Copy' ? 'hidden active:bg-green-500 float-right bg-cyan-400 text-gray-900 p-1 rounded-md border-2 border-cyan-900 font-bold hover:bg-white hover:text-black' : 'active:bg-green-500 float-right mt-10 bg-green-400 text-gray-900 p-1 rounded-md border-2 border-cyan-900 font-bold hover:bg-white hover:text-black'  }>{copy}</button> : <button onClick={()=>{
     handlecopy()
-    navigator.clipboard.writeText(obj.cont)
+    navigator.clipboard.writeText(obj.content)
     }} className={ copy == 'Copy' ? 'active:bg-green-500 mx-2 mt-4 text-sm float-right bg-cyan-400 text-gray-100 p-1 rounded-md border-2 border-cyan-900 font-bold hover:bg-white hover:text-black' : 'active:bg-green-500 float-right bg-green-400 text-gray-900 p-1 rounded-md border-2 border-cyan-900 m-4 font-bold hover:bg-white hover:text-black'  }>{copy}</button>}
-  <Typing string={obj.cont} speed={0} pipe = {true} late={0} />
+    <div className='text-left text-[13px]' >{obj.content ? <label dangerouslySetInnerHTML={{__html:obj.content}} /> : <label className='text-red-500' dangerouslySetInnerHTML={{__html:'Content is not available please click on read more to know more informantion about it..'}} />}</div>
+  <a href={obj.url} target='blank_' className='text-sm float-right text-cyan-400'>Read more..</a>
   </div>
   <br></br>
 
@@ -197,7 +223,7 @@ const final_res = res.map(
     </center>
     <h1 className='text-white fixed top-[96%] font-mono text-[13px] left-[31%] md:left-[46.7%] m-1 w-[93%] md:w-[70%]'><b><Typing string={'Powerd by'} speed ={40} pipe = {false} extratext={' '+logotext3} late={3400}/></b></h1>
     </div>
-
+    {/* <Navbar/> */}
     {loading ? loading_el : final_res}
 
     </div>

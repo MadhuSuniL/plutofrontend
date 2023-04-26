@@ -14,11 +14,18 @@ const Word = () => {
   const [lang, setLang] = useState(false)
   const [langValue, setLangValue] = useState('en')
   const [ln,setLn] = useState('en n')  
-
+  const [placeholder_state,setPlaceholder] = useState('   Search.... "United States"')
+  const [inputStyle,setInputStyle] = useState('fixed pr-20 top-[90%] left-[2%] md:left-[15%] w-[93%] md:w-[70%] rounded-xl h-10 text-xl mx-1 pl-2 bg-slate-900 text-gray-500 border-2 border-white')
   // typing logo 
   const [logotext, setText] = useState("")
 const [fullText, setFullText] = useState('PlutoKnows')
 const [index, setIndex] = useState(0)
+
+
+useEffect(()=>{
+document.getElementById('input').focus()
+},[])
+
 
 useEffect(() => {
   if (index < fullText.length) {
@@ -31,7 +38,7 @@ useEffect(() => {
 
 
 const [logotext2, setText2] = useState("")
-const [fullText2, setFullText2] = useState('Welcome ! My intelligent system can provide you with information on any single word or noun. Simply enter the word you want to know more about')
+const [fullText2, setFullText2] = useState('Welcome ! My intelligent system can provide you with information on any single word , noun or sentence. Simply enter the word you want to know more about')
 const [index2, setIndex2] = useState(0)
 const [timetype , settimetype] = useState(1000)
 
@@ -67,8 +74,8 @@ useEffect(() => {
 }, [index3])
 
 
-//   const domain = 'http://localhost:8000/'
-  const domain = 'https://plutoclarify.pythonanywhere.com/'
+  const domain = 'http://localhost:8000/'
+  // const domain = 'https://plutoclarify.pythonanywhere.com/'
   const [copy,setcopy] = useState('Copy')
   const handlecopy = () =>{
   setcopy('Copied!')
@@ -101,6 +108,12 @@ const [res , setres] = useState([])//{key:'',value:''}
 const handleinput = () => {
   setLang(false)
   setspin('logorotate')
+  var q = document.getElementById('input').value
+        document.getElementById('input').value = ''
+        setPlaceholder('Searching for... "'+input+'"')
+        document.getElementById('input').disabled = true
+        setInputStyle('animate-pulse fixed pr-20 top-[90%] left-[2%] md:left-[15%] w-[93%] md:w-[70%] rounded-xl h-10 text-xl mx-1 pl-2 bg-slate-900 text-gray-500 border-2 border-white')
+
   fetch(`${domain}get_res`,{
     method:'POST',
     headers:{
@@ -117,6 +130,11 @@ const handleinput = () => {
     res.push(data)
     setspin('logounrotate')
     document.getElementById('input').value = ''
+    document.getElementById('input').disabled = false
+    document.getElementById('input').focus()
+
+        setInputStyle('fixed pr-20 top-[90%] left-[2%] md:left-[15%] w-[93%] md:w-[70%] rounded-xl h-10 text-xl mx-1 pl-2 bg-slate-900 text-gray-500 border-2 border-white')
+        setPlaceholder('Search more..')
     if(document.querySelectorAll('#img').length != 1){
       const element = document.querySelectorAll('#img')[document.querySelectorAll('#img').length - 1]
       element.scrollIntoView(true)
@@ -129,8 +147,12 @@ const handleinput = () => {
 useEffect(() => {
   const listener = (event) => {
       setLang(false)
-
       if (event.code === "Enter") {
+        var q = document.getElementById('input').value
+        document.getElementById('input').value = ''
+        setPlaceholder('Searching for... "'+q+'"')
+        document.getElementById('input').disabled = true
+        setInputStyle('animate-pulse fixed pr-20 top-[90%] left-[2%] md:left-[15%] w-[93%] md:w-[70%] rounded-xl h-10 text-xl mx-1 pl-2 bg-slate-900 text-gray-500 border-2 border-white')
         setspin('logorotate')
         fetch(`${domain}get_res`,{
         method:'POST',
@@ -139,7 +161,7 @@ useEffect(() => {
         'Accept': 'application/json'
         },
         body:JSON.stringify({
-        key:document.getElementById('input').value,
+        key:q,
         lang:ln
     })
   })
@@ -148,6 +170,11 @@ useEffect(() => {
         res.push(data)
         setspin('logounrotate')
         document.getElementById('input').value = ''
+        document.getElementById('input').disabled = false
+        setInputStyle('fixed pr-20 top-[90%] left-[2%] md:left-[15%] w-[93%] md:w-[70%] rounded-xl h-10 text-xl mx-1 pl-2 bg-slate-900 text-gray-500 border-2 border-white')
+        document.getElementById('input').focus()
+
+        setPlaceholder('Search more..')
         if(document.querySelectorAll('#img').length != 1){
           const element = document.querySelectorAll('#img')[document.querySelectorAll('#img').length - 1]
           element.scrollIntoView(true)
@@ -166,7 +193,7 @@ useEffect(() => {
 // typing value
 const final_res = res.map(
     obj => {
-  return  (<div className='border-[0px] rounded-md text-white font-mono mx-4 mb-20 md:mx-auto p-2 border-white md:w-[70%]'>
+  return  (<div className='border-[0px] rounded-md text-white font-mono mx-2 mb-20 md:mx-auto p-2 border-white md:w-[70%]'>
   {/* images */}
   <div className='text-md'>
   {obj.img != 'none' ? <img id='img' alt={"?"+obj.key} src={obj.img} className='w-77 m-2 mb-5 rounded-md border-2 border-white mx-auto'/> : <img id='img' src={sorry} className='w-77 m-2 mb-5 rounded-md border-2 border-white mx-auto'/>}
@@ -186,8 +213,17 @@ const final_res = res.map(
     handlecopy()
     navigator.clipboard.writeText(obj.value)
     }} className={ copy == 'Copy' ? 'active:bg-green-500 mx-2 mt-4 text-sm float-right bg-cyan-400 text-gray-100 p-1 rounded-md border-2 border-cyan-900 font-bold hover:bg-white hover:text-black' : 'active:bg-green-500 float-right bg-green-400 text-gray-900 p-1 rounded-md border-2 border-cyan-900 m-4 font-bold hover:bg-white hover:text-black'  }>{copy}</button>}
-  <img src={logo} className='w-16'/>
-  <Typing string={obj.value} speed={10} pipe = {true} late={0} />
+  <br></br>
+  <br></br>
+  <br></br>
+  <div className='grid grid-cols-12'>
+    
+  <img src={logo} className='w-20 md:w-16 col-span-2 md:col-span-1 ml-[-13%] md:ml-[13%]'/>
+    
+  <div className='col-span-10 md:col-span-11'>
+  <Typing string={obj.value} speed={0} pipe = {false} late={0} />
+  </div>
+  </div>
   </div>
   <br></br>
 
@@ -318,7 +354,7 @@ const final_res = res.map(
     {/* </div> */}
     {/* typing */}
     <div className='bg-black fixed top-[90%] h-44 left-[0%] md:left-[0%] w-[100%] md:w-[100%]'>   
-        <input onClick={()=>setLang(false)} onChange={handlevalue} placeholder={'   Search.... "United States"'} id='input' className='fixed pr-20 top-[90%] left-[2%] md:left-[15%] w-[93%] md:w-[70%] rounded-xl h-10 text-xl mx-1 pl-2 bg-slate-900 text-gray-500 border-2 border-white' type="text"/><button onClick={handleinput}> <img src={send} className='w-7 m-1 ml-2 md:w-7 fixed top-[90.5%] left-[83%]  md:top-[90.5%] md:left-[82%]'/> </button>
+        <input onClick={()=>setLang(false)} onChange={handlevalue} placeholder={placeholder_state} id='input' className={inputStyle} type="text"/><button onClick={handleinput}> <img src={send} className='w-7 m-1 ml-2 md:w-7 fixed top-[90.5%] left-[83%]  md:top-[90.5%] md:left-[82%]'/> </button>
         <h1 className='text-white fixed top-[96%] font-mono text-[13px] left-[31%] md:left-[46.7%] m-1 w-[93%] md:w-[70%]'><b><Typing string={'Powerd by'} speed ={40} pipe = {false} extratext={' '+logotext3} late={6000}/></b></h1>
     </div>
 
@@ -340,9 +376,9 @@ const final_res = res.map(
     <button id='langbtn2' name={langValue+' p'} onClick={btn2} className={clkbtn2 ? btncolor : btndcolor}>{WriteLangNameInEng()}</button>    
     </center>
     </div>
-                                                                                                           {/*    <Navbar/>
-     {!lang ? <img onClick={()=>setLang(!lang)} src={lang1} className='w-10 md:w-10 opacity-80 cursor-pointer fixed top-[82.4%] active:animate-spin animate-bounce md:top-[80%] rounded-full border-0 border-gray-100 left-[84.7%] md:left-[82.6%]'/> : <h1 onClick={()=>setLang(!lang)} className='w-10 md:w-12 fixed top-[82.4%] animate-pulse md:top-[80%] active:animate-spin text-2xl font-bold left-[88.7%] cursor-pointer md:left-[83.2%]'>X</h1>}
-*/}
+    <Navbar/>
+    {!lang ? <img onClick={()=>setLang(!lang)} src={lang1} className='w-10 md:w-10 opacity-80 cursor-pointer fixed top-[82.4%] active:animate-spin animate-bounce md:top-[80%] rounded-full border-0 border-gray-100 left-[84.7%] md:left-[82.6%]'/> : <h1 onClick={()=>setLang(!lang)} className='w-10 md:w-12 fixed top-[82.4%] animate-pulse md:top-[80%] active:animate-spin text-2xl font-bold left-[88.7%] cursor-pointer md:left-[83.2%]'>X</h1>}
+
     
     {final_res}
     </div>
