@@ -345,7 +345,7 @@ const final_res = res.map(
     <div className='text-white pt-16 md:pt-[6%] pb-20 md:pb-[6%]'>
     {/* logo */}
     <div className='fixed top-[0%] bg-slate-900 w-full flex justify-center items-center'>
-    <img src={logo} className={spin == 'logounrotate' ? 'logounrotate w-14 md:w-16 mt-0 md:mt-3' : 'logorotate w-14 md:w-16 mt-0 md:mt-3'}/>
+    <img src={logo} className={spin == 'logounrotate' ? 'logounrotate w-14 md:w-16 mt-0 md:mt-3 rounded-full' : 'logorotate w-14 md:w-16 mt-0 md:mt-3 rounded-full'}/>
     <h1 className='font-bold text-center mb-1 mr-2 mt-1 md:m-0 md:mt-2 text-2xl md:text-4xl text-white'>{logotext}</h1>
     </div>
     {/* <div className='grid md:grid-cols-2 p-3'> */}
