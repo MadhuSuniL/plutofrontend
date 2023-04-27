@@ -1,6 +1,6 @@
 import React from 'react'
 import send from '../images/sentt.png'
-import logo from '../images/cl2.png'
+import logo from '../images/aibot.png'
 import lang1 from '../images/lang.png'
 import sorry from '../images/sorry.gif'
 import { useState , useEffect } from 'react';
@@ -23,7 +23,9 @@ const [index, setIndex] = useState(0)
 
 
 useEffect(()=>{
-document.getElementById('input').focus()
+  setTimeout(function(){
+    document.getElementById('input').focus()
+  },4000)
 },[])
 
 
@@ -131,7 +133,7 @@ const handleinput = () => {
     setspin('logounrotate')
     document.getElementById('input').value = ''
     document.getElementById('input').disabled = false
-    document.getElementById('input').focus()
+    // document.getElementById('input').focus()
 
         setInputStyle('fixed pr-20 top-[90%] left-[2%] md:left-[15%] w-[93%] md:w-[70%] rounded-xl h-10 text-xl mx-1 pl-2 bg-slate-900 text-gray-500 border-2 border-white')
         setPlaceholder('Search more..')
@@ -172,7 +174,7 @@ useEffect(() => {
         document.getElementById('input').value = ''
         document.getElementById('input').disabled = false
         setInputStyle('fixed pr-20 top-[90%] left-[2%] md:left-[15%] w-[93%] md:w-[70%] rounded-xl h-10 text-xl mx-1 pl-2 bg-slate-900 text-gray-500 border-2 border-white')
-        document.getElementById('input').focus()
+        // document.getElementById('input').focus()
 
         setPlaceholder('Search more..')
         if(document.querySelectorAll('#img').length != 1){
@@ -345,7 +347,7 @@ const final_res = res.map(
     <div className='text-white pt-16 md:pt-[6%] pb-20 md:pb-[6%]'>
     {/* logo */}
     <div className='fixed top-[0%] bg-slate-900 w-full flex justify-center items-center'>
-    <img src={logo} className={spin == 'logounrotate' ? 'logounrotate w-14 md:w-16 mt-0 md:mt-3 rounded-[50%]' : 'logorotate w-14 md:w-16 mt-0 md:mt-3 rounded-full'}/>
+    <img src={logo} className={spin == 'logounrotate' ? 'logounrotate w-10 md:w-16 m-2 md:mt-3 rounded-[50%]' : 'logorotate w-10 md:w-16 m-2 md:mt-3 rounded-full'}/>
     <h1 className='font-bold text-center mb-1 mr-2 mt-1 md:m-0 md:mt-2 text-2xl md:text-4xl text-white'>{logotext}</h1>
     </div>
     {/* <div className='grid md:grid-cols-2 p-3'> */}

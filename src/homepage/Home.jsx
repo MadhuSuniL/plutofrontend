@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import ExploreCard from './ExploreCard'
-import logo from '../images/cl.png'
+import logo from '../images/aibot.png'
 import moon from '../images/moon.png'
 import sun from '../images/sun.png'
 import aibot from '../images/aibot.png'
@@ -119,7 +119,7 @@ const Home = () => {
     <div className='text-white'>
       {/* heding */}
       <div className='flex items-center justify-between px-2 md:px-36'>
-      <h1 className='text-2xl font-bold text-center flex items-center justify-center md:justify-start'><img src={logo} className='w-16 mx-0 rounded-full animate-spin'/>PlutoKnows</h1>
+      <h1 className='text-2xl font-bold text-center flex items-center justify-center md:justify-start'><img src={logo} className='w-14 m-2 rounded-full animate-pulse'/>PlutoKnows</h1>
       <div className='flex flex-col items-end'>
       {/* <h1 className='text-sm font-bold text-center flex items-center justify-center md:justify-start'>Hyderbad</h1> */}
       <h1 className='text-sm font-bold text-center flex items-center justify-center md:justify-start'>{date}</h1>
