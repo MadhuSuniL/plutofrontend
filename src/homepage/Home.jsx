@@ -143,9 +143,9 @@ const Home = () => {
             </div>
 
 <br className='md:hidden' />
-            {/* <div className='col-span-1'>
-            <h1 className=' text-2xl m-5 font-bold text-cyan-400'>News</h1>
-            <div className='grid grid-cols-2  '>
+            <div className='col-span-1'>
+            <h1 className=' text-xl font-sans m-0 md:mt-48 font-bold text-green-300'> <Typing string={"Hi there! As an AI-powered chatbot, I'm here to assist you with any questions or problems you might have. With a vast dataset of information and advanced AI technologies at my disposal, I'm equipped to provide you with quick and accurate answers to a wide range of queries. So don't hesitate to ask me anything, and I'll do my best to help you out!"} speed={0} pipe={false} /> </h1>
+            {/* <div className='grid grid-cols-2  '>
             <h1 onClick={()=> nav('/news/latest')} className='col-span-2 m-0 cursor-pointer my-5 mt-0 p-2 rounded-lg border-t-2 border-cyan-400 shadow-md hover:shadow-lg hover:shadow-cyan-400 hover:scale-105 duration-200 ease-linear shadow-cyan-400 font-extrabold text-lg text-cyan-3000 text-center flex flex-col justify-center items-center'><img src={news} className='w-10 mx-2'/>Today Latest News</h1>
             <ExploreCard path={'/news/business'} name={'Business'}/>
             <ExploreCard path={'/news/entertainment'} name={'Entertainment'}/>
@@ -173,8 +173,9 @@ const Home = () => {
             <ExploreCard  name={'Face Age&Gender Detection'} />
             <ExploreCard  name={'Text To Voice'} />
             <ExploreCard  name={'Voice To Text'} />
-            </div>
             </div> */}
+            </div>
+
         </div>
 
 
