@@ -54,7 +54,7 @@ const handleinput = async () => {
       'Accept': 'application/json'
     },
     body:JSON.stringify({
-      type
+      type:'letest'
     })
   })
   .then(res => res.json())
@@ -131,9 +131,9 @@ useEffect(() => {
 }, [index3])
 
 
-  const domain = 'http://localhost:8000/'
   // const domain = 'http://localhost:8000/'
-  // const domain = 'https://plutoclarify.pythonanywhere.com/'
+  // const domain = 'http://localhost:8000/'
+  const domain = 'https://plutoclarify.pythonanywhere.com/'
   const [copy,setcopy] = useState('Copy')
   const handlecopy = () =>{
   setcopy('Copied!')
@@ -219,7 +219,7 @@ const final_res = res.map(
     <h1 className='font-bold text-center mb-1 mr-2 mt-1 md:m-0 md:mt-2 text-2xl md:text-4xl text-white'>{logotext}</h1>
     </div>
     <h1 className='font-bold md:text-lg mx-10 mt-2 rounded-xl p-3 text-center text-gray-400 bg-slate-900'>{logotext2}</h1>
-
+{res.length}
     <div className='bg-black fixed top-[90%] h-44 left-[0%] md:left-[0%] w-[100%] md:w-[100%]'>   
     <center>
     {/*<button className={btndcolor}>Previous</button><button onClick={next} className={btncolor}>Next</button> */}
