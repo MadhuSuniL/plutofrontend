@@ -137,6 +137,7 @@ const handleinput = () => {
 
         setInputStyle('fixed pr-20 top-[90%] left-[2%] md:left-[15%] w-[93%] md:w-[70%] rounded-xl h-10 text-xl mx-1 pl-2 bg-slate-900 text-gray-500 border-2 border-white')
         setPlaceholder('Search more..')
+
     if(document.querySelectorAll('#img').length != 1){
       const element = document.querySelectorAll('#img')[document.querySelectorAll('#img').length - 1]
       element.scrollIntoView(true)
@@ -170,6 +171,7 @@ useEffect(() => {
       .then(res => res.json())
       .then(data => {
         res.push(data)
+        // alert(data.value)
         setspin('logounrotate')
         document.getElementById('input').value = ''
         document.getElementById('input').disabled = false
@@ -177,6 +179,7 @@ useEffect(() => {
         // document.getElementById('input').focus()
 
         setPlaceholder('Search more..')
+
         if(document.querySelectorAll('#img').length != 1){
           const element = document.querySelectorAll('#img')[document.querySelectorAll('#img').length - 1]
           element.scrollIntoView(true)
@@ -378,8 +381,8 @@ const final_res = res.map(
     <button id='langbtn2' name={langValue+' p'} onClick={btn2} className={clkbtn2 ? btncolor : btndcolor}>{WriteLangNameInEng()}</button>    
     </center>
     </div>
-    <Navbar/>
-    {!lang ? <img onClick={()=>setLang(!lang)} src={lang1} className='w-10 md:w-10 opacity-80 cursor-pointer fixed top-[82.4%] active:animate-spin animate-bounce md:top-[80%] rounded-full border-0 border-gray-100 left-[84.7%] md:left-[82.6%]'/> : <h1 onClick={()=>setLang(!lang)} className='w-10 md:w-12 fixed top-[82.4%] animate-pulse md:top-[80%] active:animate-spin text-2xl font-bold left-[88.7%] cursor-pointer md:left-[83.2%]'>X</h1>}
+    {/* <Navbar/> */}
+    {/* {!lang ? <img onClick={()=>setLang(!lang)} src={lang1} className='w-10 md:w-10 opacity-80 cursor-pointer fixed top-[82.4%] active:animate-spin animate-bounce md:top-[80%] rounded-full border-0 border-gray-100 left-[84.7%] md:left-[82.6%]'/> : <h1 onClick={()=>setLang(!lang)} className='w-10 md:w-12 fixed top-[82.4%] animate-pulse md:top-[80%] active:animate-spin text-2xl font-bold left-[88.7%] cursor-pointer md:left-[83.2%]'>X</h1>} */}
 
     
     {final_res}
