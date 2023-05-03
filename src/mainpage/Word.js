@@ -137,7 +137,6 @@ const handleinput = () => {
 
         setInputStyle('fixed pr-20 top-[90%] left-[2%] md:left-[15%] w-[93%] md:w-[70%] rounded-xl h-10 text-xl mx-1 pl-2 bg-slate-900 text-gray-500 border-2 border-white')
         setPlaceholder('Search more..')
-
     if(document.querySelectorAll('#img').length != 1){
       const element = document.querySelectorAll('#img')[document.querySelectorAll('#img').length - 1]
       element.scrollIntoView(true)
@@ -171,7 +170,6 @@ useEffect(() => {
       .then(res => res.json())
       .then(data => {
         res.push(data)
-        // alert(data.value)
         setspin('logounrotate')
         document.getElementById('input').value = ''
         document.getElementById('input').disabled = false
@@ -179,7 +177,6 @@ useEffect(() => {
         // document.getElementById('input').focus()
 
         setPlaceholder('Search more..')
-
         if(document.querySelectorAll('#img').length != 1){
           const element = document.querySelectorAll('#img')[document.querySelectorAll('#img').length - 1]
           element.scrollIntoView(true)
