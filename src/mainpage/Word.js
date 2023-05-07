@@ -76,8 +76,8 @@ useEffect(() => {
 }, [index3])
 
 
-  // const domain = 'http://localhost:8000/'
-  const domain = 'https://plutoclarify.pythonanywhere.com/'
+  const domain = 'http://localhost:8000/'
+  // const domain = 'https://plutoclarify.pythonanywhere.com/'
   const [copy,setcopy] = useState('Copy')
   const handlecopy = () =>{
   setcopy('Copied!')
@@ -124,7 +124,7 @@ const handleinput = () => {
     },
     body:JSON.stringify({
       key:input,
-      lang:ln
+      lang:langValue
     })
   })
   .then(res => res.json())
@@ -148,14 +148,15 @@ const handleinput = () => {
 
 useEffect(() => {
   const listener = (event) => {
-      setLang(false)
-      if (event.code === "Enter") {
+    if (event.code === "Enter") {
+        setLang(false)
         var q = document.getElementById('input').value
         document.getElementById('input').value = ''
         setPlaceholder('Searching for... "'+q+'"')
         document.getElementById('input').disabled = true
         setInputStyle('animate-pulse fixed pr-20 top-[90%] left-[2%] md:left-[15%] w-[93%] md:w-[70%] rounded-xl h-10 text-xl mx-1 pl-2 bg-slate-900 text-gray-500 border-2 border-white')
         setspin('logorotate')
+        
         fetch(`${domain}get_res`,{
         method:'POST',
         headers:{
@@ -163,8 +164,8 @@ useEffect(() => {
         'Accept': 'application/json'
         },
         body:JSON.stringify({
-        key:q,
-        lang:ln
+        lang:langValue,
+        key:q
     })
   })
       .then(res => res.json())
@@ -195,7 +196,7 @@ useEffect(() => {
 // typing value
 const final_res = res.map(
     obj => {
-  return  (<div className='border-[0px] rounded-md text-white font-mono mx-2 mb-20 md:mx-auto p-2 border-white md:w-[70%]'>
+  return  (<div key={obj.key} className='border-[0px] rounded-md text-white font-mono mx-2 mb-20 md:mx-auto p-2 border-white md:w-[70%]'>
   {/* images */}
   <div className='text-md'>
   {obj.img != 'none' ? <img id='img' alt={"?"+obj.key} src={obj.img} className='w-77 m-2 mb-5 rounded-md border-2 border-white mx-auto'/> : <img id='img' src={sorry} className='w-77 m-2 mb-5 rounded-md border-2 border-white mx-auto'/>}
@@ -203,7 +204,7 @@ const final_res = res.map(
   {/* question */}
   <div>
   <h1 id='key' className='font-bold mb-3 text-green-600 text-lg'>{obj.key}</h1>
-  <hr/>
+  <hr className='font-bold'/>
   </div>
   <br></br>
   {/* value */}
@@ -260,17 +261,17 @@ const final_res = res.map(
     const [clkbtn2,setClkBtn2] = useState(false)  
     
 
-  useEffect(()=>{
+  // useEffect(()=>{
 
-    if(clkbtn === true){
-      setLn(document.getElementById('langbtn').getAttribute('name'))
-    }
-    else{
-      setLn(document.getElementById('langbtn2').getAttribute('name'))
-    }
+  //   if(clkbtn === true){
+  //     setLn(document.getElementById('langbtn').getAttribute('name'))
+  //   }
+  //   else{
+  //     setLn(document.getElementById('langbtn2').getAttribute('name'))
+  //   }
 
 
-  },[langValue])
+  // },[])
 
 
 
@@ -286,60 +287,27 @@ const final_res = res.map(
       setLn(document.getElementById('langbtn2').getAttribute('name'))
   }
 
-  function WriteLangNameInEng(){
-    if(langValue === 'en'){
-      return 'English'
-    }
-    else if(langValue === 'te'){
-      return 'Telugu'
-    }
-    else if(langValue === 'ta'){
-      return 'Tamil'
-    }
-    else if(langValue === 'ar'){
-      return 'Arabic'
-    }
-    else if(langValue === 'hi'){
-      return 'Hindi'
-    }
-    else if(langValue === 'ml'){
-      return 'Malayalam'
-    }
-    else if(langValue === 'kn'){
-      return 'Kannada'
-    }
-    else if(langValue === 'zh-cn'){
-      return 'Chinese'
-    }
-  }
 
-  function WriteLangNameInDef(){
-    if(langValue === 'en'){
+
+
+  function show_lang(){
+    if (langValue === 'en'){
       return 'English'
     }
-    else if(langValue === 'te'){
+    else if (langValue === 'te'){
       return 'తెలుగు'
     }
-    else if(langValue === 'ta'){
+    else if (langValue === 'ta'){
       return 'தமிழ்'
     }
-    else if(langValue === 'ar'){
-      return 'عربي'
-    }
-    else if(langValue === 'hi'){
+    else if (langValue === 'hi'){
       return 'हिंदी'
     }
-    else if(langValue === 'ml'){
-      return 'മലയാളം'
-    }
-    else if(langValue === 'kn'){
+    else{
       return 'ಕನ್ನಡ'
     }
-    else if(langValue === 'zh-cn'){
-      return '中国人'
-    }
   }
-
+  
 
 
 
@@ -363,23 +331,23 @@ const final_res = res.map(
     <div className={lang ? 'fixed top-[50%] left-[50%] w-[94%] md:w-[23%] ease-in-out duration-700 translate-x-[-50%] translate-y-[-50%] shadow-inner shadow-slate-500 rounded-lg p-3 md:p-5 bg-slate-900' : 'fixed w-[94%] md:w-[23%] left-[120%] top-[87%] ease-in-out duration-700'}>
     <h1 className='m-3 text-xl font-bold text-center text-gray-500 mb-5'>Settings</h1>
     <label htmlFor='lang' className='m-2 font-bold'>Response Language</label>
-    <select id='lang' className='rounded-xl h-10 text-xl mx-1 pl-2 bg-slate-900 text-gray-500 border-2 border-white' onChange={(e)=> setLangValue(e.target.value)}>
+    <select id='lang' className='rounded-xl h-10 text-xl mx-1 pl-2 bg-slate-900 text-gray-500 border-2 border-white' onChange={(e)=> {
+      setLangValue(e.target.value)
+      // alert(langValue)
+    }}>
         <option value='en'>English</option>
         <option value='te'>తెలుగు</option>
         <option value='hi'>हिंदी</option>
         <option value='ta'>தமிழ்</option>
         <option value='kn'>ಕನ್ನಡ</option>
-        <option value='ml'>മലയാളം</option>
-        <option value='zh-cn'>中国人</option>
-        <option value='ar'>عربي</option>
     </select><br></br>
     <center>
-    <button id='langbtn' name={langValue+' n'} onClick={btn1}  className={clkbtn ? btncolor : btndcolor}>{WriteLangNameInDef()}</button>    
-    <button id='langbtn2' name={langValue+' p'} onClick={btn2} className={clkbtn2 ? btncolor : btndcolor}>{WriteLangNameInEng()}</button>    
+    {/* <button id='langbtn' name={langValue+' n'} onClick={btn1}  className={clkbtn ? btncolor : btndcolor}>{WriteLangNameInDef()}</button>     */}
+    {/* <button id='langbtn2' name={langValue+' p'} onClick={btn2} className={clkbtn2 ? btncolor : btndcolor}>{WriteLangNameInEng()}</button>     */}
     </center>
     </div>
     {/* <Navbar/> */}
-    {/* {!lang ? <img onClick={()=>setLang(!lang)} src={lang1} className='w-10 md:w-10 opacity-80 cursor-pointer fixed top-[82.4%] active:animate-spin animate-bounce md:top-[80%] rounded-full border-0 border-gray-100 left-[84.7%] md:left-[82.6%]'/> : <h1 onClick={()=>setLang(!lang)} className='w-10 md:w-12 fixed top-[82.4%] animate-pulse md:top-[80%] active:animate-spin text-2xl font-bold left-[88.7%] cursor-pointer md:left-[83.2%]'>X</h1>} */}
+    {!lang ? <span className='flex flex-col cursor-pointer fixed top-[82.4%] active:animate-spin animate-bounce md:top-[80%] rounded-full border-0 border-gray-100 left-[84.7%] md:left-[82.6%]'><img onClick={()=>setLang(!lang)} src={lang1} className='w-10 md:w-10 rounded-full'/><h1 className='text-center'>{show_lang()}</h1></span> : <h1 onClick={()=>setLang(!lang)} className='w-10 md:w-12 fixed top-[82.4%] animate-pulse md:top-[80%] active:animate-spin text-2xl font-bold left-[88.7%] cursor-pointer md:left-[83.2%]'>X</h1>}
 
     
     {final_res}
