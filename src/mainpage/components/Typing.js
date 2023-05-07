@@ -34,7 +34,9 @@ useEffect(() => {
   
     return (
         <div>
-    <div className='text-left text-[13px]' >{<label dangerouslySetInnerHTML={{__html:text}} />}{props.pipe ? <b className='text-cyan-400'>{pipe}</b> : ''}<b className='text-cyan-400 text-md'>{props.extratext}</b></div>
+    {props.style == 'new' }
+    <div className={props.style} >{<label dangerouslySetInnerHTML={{__html:text}} />}{props.pipe ? <b className='text-cyan-400'>{pipe}</b> : ''}<b className='text-cyan-400 text-md'>{props.extratext}</b></div>
+    {/* <div className='text-left text-[13px]' >{<label dangerouslySetInnerHTML={{__html:text}} />}{props.pipe ? <b className='text-cyan-400'>{pipe}</b> : ''}<b className='text-cyan-400 text-md'>{props.extratext}</b></div> */}
     </div>
   )
 }

@@ -225,7 +225,7 @@ const final_res = res.map(
   <img src={logo} className='w-20 md:w-16 col-span-2 md:col-span-1 ml-[-13%] md:ml-[13%]'/>
     
   <div className='col-span-10 md:col-span-11'>
-  <Typing string={obj.value} speed={0} pipe = {false} late={0} />
+  <Typing string={obj.value} speed={0} style={'text-left text-[13px]'} pipe = {false} late={0} />
   </div>
   </div>
   </div>

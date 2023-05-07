@@ -135,16 +135,16 @@ const Home = () => {
               setTimeout(function(){
                 return nav('/pluto')
               },600)
-            }} className='active:scale-0 hover:scale-0 md:hover:scale-95 duration-1000 cursor-pointer border-2 border-cyan-400 rounded-[50%] w-72 h-72 md:w-96 md:h-96 text-center mt-1 py-10 md:py-20 text-3xl font-bold animate-pulse flex items-center flex-col'><img src={aibot} className='md:w-36 w-20 animate-bounce mt-10 md:mt-1'/><div className='animate-bounce text-[#7fffd4]'>Tap to chat!</div><div className='animate-bounce text-cyan-400 text-sm mt-0'>Questions</div></div>
+            }} className='active:scale-0 hover:scale-0 md:hover:scale-95 duration-1000 cursor-pointer border-2 border-cyan-400 rounded-[50%] w-72 h-72 md:w-96 md:h-96 text-center mt-1 py-10 md:py-20 text-3xl font-bold animate-pulse flex items-center flex-col'><img src={aibot} className='md:w-36 w-20 animate-bounce mt-10 md:mt-1'/><div className='animate-bounce text-[#7fffd4]'>Tap to chat!</div><div className='animate-bounce text-green-400 text-2xl font-extrabold mt-0'></div></div>
             </center>
-            <h1 className='p-3 text-center text-3xl m-3 font-bold text-cyan-400'>Hai I am Pluto.. </h1>
+            <h1 className='p-3 text-center text-3xl m-3 font-bold text-green-300'><Typing string={"Hi there! I am Pluto.. Are you ready to chat with me? "} speed={100} style={'text-xl'} pipe={false} /></h1>
             <h1 className='text-center text-md font-bold m-3 mx-0 mt-0 text-yellow-400'><i>{quotes[Math.floor(Math.random() * 74)]}</i></h1>
 
             </div>
 
 <br className='md:hidden' />
             <div className='col-span-1'>
-            <h1 className=' text-xl font-sans m-0 md:mt-48 font-bold text-green-300'> <Typing string={"Hi there! As an AI-powered chatbot, I'm here to assist you with any questions or problems you might have. With a vast dataset of information and advanced AI technologies at my disposal, I'm equipped to provide you with quick and accurate answers to a wide range of queries. So don't hesitate to ask me anything, and I'll do my best to help you out!"} speed={0} pipe={false} /> </h1>
+            <h1 className=' text-xl font-sans m-0 md:mt-48 font-bold text-green-300'>  </h1>
             {/* <div className='grid grid-cols-2  '>
             <h1 onClick={()=> nav('/news/latest')} className='col-span-2 m-0 cursor-pointer my-5 mt-0 p-2 rounded-lg border-t-2 border-cyan-400 shadow-md hover:shadow-lg hover:shadow-cyan-400 hover:scale-105 duration-200 ease-linear shadow-cyan-400 font-extrabold text-lg text-cyan-3000 text-center flex flex-col justify-center items-center'><img src={news} className='w-10 mx-2'/>Today Latest News</h1>
             <ExploreCard path={'/news/business'} name={'Business'}/>
