@@ -6,6 +6,7 @@ import sorry from '../images/sorry.gif'
 import { useState , useEffect, useRef } from 'react';
 import Typing from "./components/Typing";
 import Navbar from '../Navbar'
+import intro from '../audio/welcome.mp3'
 
 
 const Word = () => {
@@ -84,8 +85,8 @@ useEffect(() => {
 }, [index3])
 
 
-  // const domain = 'http://localhost:8000/'
-  const domain = 'https://plutoclarify.pythonanywhere.com/'
+  const domain = 'http://localhost:8000/'
+  // const domain = 'https://plutoclarify.pythonanywhere.com/'
   const [copy,setcopy] = useState('Copy')
   const handlecopy = () =>{
   setcopy('Copied!')
@@ -358,6 +359,9 @@ const final_res = res.map(
     {/* <Navbar/> */}
     {!lang ? <span className='flex flex-col cursor-pointer fixed top-[82.4%] active:animate-spin animate-bounce md:top-[80%] rounded-full border-0 border-gray-100 left-[84.7%] md:left-[82.6%]'><img onClick={()=>setLang(!lang)} src={lang1} className='w-10 md:w-10 rounded-full'/><h1 className='text-center'>{show_lang()}</h1></span> : <h1 onClick={()=>setLang(!lang)} className='w-10 md:w-12 fixed top-[82.4%] animate-pulse md:top-[80%] active:animate-spin text-2xl font-bold left-[88.7%] cursor-pointer md:left-[83.2%]'>X</h1>}
 
+    <audio autoPlay>
+      <source src={intro}></source>
+    </audio>
     
     {final_res}
     </div>
