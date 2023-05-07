@@ -107,7 +107,8 @@ useEffect(() => {
 
 const [res , setres] = useState([])//{key:'',value:''}
 
-const handleinput = () => {
+const handleinput = (f) => {
+  f.preventDefault();
   setLang(false)
   setspin('logorotate')
   var q = document.getElementById('input').value
@@ -146,51 +147,51 @@ const handleinput = () => {
 }
 
 
-useEffect(() => {
-  const listener = (event) => {
-    if (event.code === "Enter") {
-        setLang(false)
-        var q = document.getElementById('input').value
-        document.getElementById('input').value = ''
-        setPlaceholder('Searching for... "'+q+'"')
-        document.getElementById('input').disabled = true
-        setInputStyle('animate-pulse fixed pr-20 top-[90%] left-[2%] md:left-[15%] w-[93%] md:w-[70%] rounded-xl h-10 text-xl mx-1 pl-2 bg-slate-900 text-gray-500 border-2 border-white')
-        setspin('logorotate')
+// useEffect(() => {
+//   const listener = (event) => {
+//     if (event.code === "Enter") {
+//         setLang(false)
+//         var q = document.getElementById('input').value
+//         document.getElementById('input').value = ''
+//         setPlaceholder('Searching for... "'+q+'"')
+//         document.getElementById('input').disabled = true
+//         setInputStyle('animate-pulse fixed pr-20 top-[90%] left-[2%] md:left-[15%] w-[93%] md:w-[70%] rounded-xl h-10 text-xl mx-1 pl-2 bg-slate-900 text-gray-500 border-2 border-white')
+//         setspin('logorotate')
         
-        fetch(`${domain}get_res`,{
-        method:'POST',
-        headers:{
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-        },
-        body:JSON.stringify({
-        lang:langValue,
-        key:q
-    })
-  })
-      .then(res => res.json())
-      .then(data => {
-        res.push(data)
-        setspin('logounrotate')
-        document.getElementById('input').value = ''
-        document.getElementById('input').disabled = false
-        setInputStyle('fixed pr-20 top-[90%] left-[2%] md:left-[15%] w-[93%] md:w-[70%] rounded-xl h-10 text-xl mx-1 pl-2 bg-slate-900 text-gray-500 border-2 border-white')
-        // document.getElementById('input').focus()
+//         fetch(`${domain}get_res`,{
+//         method:'POST',
+//         headers:{
+//         'Content-Type': 'application/json',
+//         'Accept': 'application/json'
+//         },
+//         body:JSON.stringify({
+//         lang:langValue,
+//         key:q
+//     })
+//   })
+//       .then(res => res.json())
+//       .then(data => {
+//         res.push(data)
+//         setspin('logounrotate')
+//         document.getElementById('input').value = ''
+//         document.getElementById('input').disabled = false
+//         setInputStyle('fixed pr-20 top-[90%] left-[2%] md:left-[15%] w-[93%] md:w-[70%] rounded-xl h-10 text-xl mx-1 pl-2 bg-slate-900 text-gray-500 border-2 border-white')
+//         // document.getElementById('input').focus()
 
-        setPlaceholder('Search more..')
-        if(document.querySelectorAll('#img').length != 1){
-          const element = document.querySelectorAll('#img')[document.querySelectorAll('#img').length - 1]
-          element.scrollIntoView(true)
-        }
-  })
+//         setPlaceholder('Search more..')
+//         if(document.querySelectorAll('#img').length != 1){
+//           const element = document.querySelectorAll('#img')[document.querySelectorAll('#img').length - 1]
+//           element.scrollIntoView(true)
+//         }
+//   })
   
-      }
-      else{
+//       }
+//       else{
 
-      }
-  };
-  document.addEventListener("keypress", listener);
-}, []);
+//       }
+//   };
+//   document.addEventListener("keypress", listener);
+// }, []);
 
 
 // typing value
@@ -324,7 +325,10 @@ const final_res = res.map(
     {/* </div> */}
     {/* typing */}
     <div className='bg-black fixed top-[90%] h-44 left-[0%] md:left-[0%] w-[100%] md:w-[100%]'>   
-        <input onClick={()=>setLang(false)} onChange={handlevalue} placeholder={placeholder_state} id='input' className={inputStyle} type="text"/><button onClick={handleinput}> <img src={send} className='w-7 m-1 ml-2 md:w-7 fixed top-[90.5%] left-[83%]  md:top-[90.5%] md:left-[82%]'/> </button>
+        <form onSubmit={handleinput}>
+        <input onClick={()=>setLang(false)} onChange={handlevalue} placeholder={placeholder_state} id='input' className={inputStyle} type="text"/><input type="image" src={send} className='w-7 m-1 ml-2 md:w-7 fixed top-[90.5%] left-[83%]  md:top-[90.5%] md:left-[82%]' alt="Submit" name="submitBtn" value="Submit" />   
+        {/* <button onClick={handleinput}> <img src={send} className='w-7 m-1 ml-2 md:w-7 fixed top-[90.5%] left-[83%]  md:top-[90.5%] md:left-[82%]'/> </button>           */}
+        </form> 
         <h1 className='text-white fixed top-[96%] font-mono text-[13px] left-[31%] md:left-[46.7%] m-1 w-[93%] md:w-[70%]'><b><Typing string={'Powerd by'} speed ={40} pipe = {false} extratext={' '+logotext3} late={6000}/></b></h1>
     </div>
 
