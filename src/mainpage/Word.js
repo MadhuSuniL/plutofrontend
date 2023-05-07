@@ -76,8 +76,8 @@ useEffect(() => {
 }, [index3])
 
 
-  const domain = 'http://localhost:8000/'
-  // const domain = 'https://plutoclarify.pythonanywhere.com/'
+  // const domain = 'http://localhost:8000/'
+  const domain = 'https://plutoclarify.pythonanywhere.com/'
   const [copy,setcopy] = useState('Copy')
   const handlecopy = () =>{
   setcopy('Copied!')
