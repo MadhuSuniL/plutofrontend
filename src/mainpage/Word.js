@@ -3,7 +3,7 @@ import send from '../images/sentt.png'
 import logo from '../images/aibot.png'
 import lang1 from '../images/lang.png'
 import sorry from '../images/sorry.gif'
-import { useState , useEffect } from 'react';
+import { useState , useEffect, useRef } from 'react';
 import Typing from "./components/Typing";
 import Navbar from '../Navbar'
 
@@ -20,6 +20,14 @@ const Word = () => {
   const [logotext, setText] = useState("")
 const [fullText, setFullText] = useState('PlutoKnows')
 const [index, setIndex] = useState(0)
+
+
+//auto scrolling
+const scroll =()=>{
+  setTimeout(function(){
+    document.querySelectorAll('#img')[document.querySelectorAll('#img').length - 1].scrollIntoView({ behavior: 'smooth' })  
+  },30)
+}
 
 
 useEffect(()=>{
@@ -134,17 +142,13 @@ const handleinput = (f) => {
     setspin('logounrotate')
     document.getElementById('input').value = ''
     document.getElementById('input').disabled = false
-    // document.getElementById('input').focus()
-
-        setInputStyle('fixed pr-20 top-[90%] left-[2%] md:left-[15%] w-[93%] md:w-[70%] rounded-xl h-10 text-xl mx-1 pl-2 bg-slate-900 text-gray-500 border-2 border-white')
-        setPlaceholder('Search more..')
-    if(document.querySelectorAll('#img').length != 1){
-      const element = document.querySelectorAll('#img')[document.querySelectorAll('#img').length - 1]
-      element.scrollIntoView(true)
-    }
+    setInputStyle('fixed pr-20 top-[90%] left-[2%] md:left-[15%] w-[93%] md:w-[70%] rounded-xl h-10 text-xl mx-1 pl-2 bg-slate-900 text-gray-500 border-2 border-white')
+    setPlaceholder('Search more..')
+        
   })
   
 }
+
 
 
 // useEffect(() => {
@@ -197,7 +201,7 @@ const handleinput = (f) => {
 // typing value
 const final_res = res.map(
     obj => {
-  return  (<div key={obj.key} className='border-[0px] rounded-md text-white font-mono mx-2 mb-20 md:mx-auto p-2 border-white md:w-[70%]'>
+  return  (<div id='res' key={obj.key} className='border-[0px] rounded-md text-white font-mono mx-2 mb-20 md:mx-auto p-2 border-white md:w-[70%]'>
   {/* images */}
   <div className='text-md'>
   {obj.img != 'none' ? <img id='img' alt={"?"+obj.key} src={obj.img} className='w-77 m-2 mb-5 rounded-md border-2 border-white mx-auto'/> : <img id='img' src={sorry} className='w-77 m-2 mb-5 rounded-md border-2 border-white mx-auto'/>}
@@ -208,6 +212,7 @@ const final_res = res.map(
   <hr className='font-bold'/>
   </div>
   <br></br>
+
   {/* value */}
   <div className='text-md'>
     {obj.value == "I am sorry i could't found the result. Please check spellings or try in another way(with new words)." ? <button disabled onClick={()=>{
@@ -224,7 +229,7 @@ const final_res = res.map(
     
   <img src={logo} className='w-20 md:w-16 col-span-2 md:col-span-1 ml-[-13%] md:ml-[13%]'/>
     
-  <div className='col-span-10 md:col-span-11'>
+  <div id='res' onLoad={scroll()} className='col-span-10 md:col-span-11'>
   <Typing string={obj.value} speed={0} style={'text-left text-[13px]'} pipe = {false} late={0} />
   </div>
   </div>
@@ -237,7 +242,7 @@ const final_res = res.map(
   <h1 className='mb-5 mt-0 text-lg font-bold'>You may search about these lines also...<br></br></h1>
   {obj.extra.map(item =>{
     return(
-      <h1 id='content' onClick={()=>{
+      <h1 key={item} id='content' onClick={()=>{
         handlepaste(item)
       }} className='bg-slate-900 cursor-pointer shadow-xl rounded-md shadow-cyan-400 active:shadow-black text-gray-200 text-center my-2 p-2'>{item}</h1>
     )
