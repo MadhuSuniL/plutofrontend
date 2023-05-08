@@ -99,6 +99,7 @@ useEffect(() => {
  const [input,setinput] = useState('')
 
  const handlevalue = event =>{
+   event.preventDefault()
     setinput(event.target.value)
     // console.log(input);
     setLang(false)
