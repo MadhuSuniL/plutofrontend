@@ -7,6 +7,8 @@ import aibot from '../images/aibot.png'
 import news from '../images/news.png'
 import Typing from '../mainpage/components/Typing'
 import { useNavigate } from 'react-router-dom'
+import intro from '../audio/tone4.wav'
+
 
 const Home = () => {
   const nav = useNavigate()
@@ -15,7 +17,6 @@ const Home = () => {
   const [date,setDate] = useState(null)
   const [timestate,setTime] = useState('00:00')
   const quotes = ['“So many books, so little time.”',
-  '“',
   "“We read to know we're not alone.”",
   '“Not all those who wander are lost.”',
   '“Reality continues to ruin my life.”',
@@ -132,7 +133,8 @@ const Home = () => {
             <div className='col-span-2'>
             <center>
             <div onClick={()=>{
-              setTimeout(function(){
+                document.getElementById('intro_audio').play()
+                setTimeout(function(){
                 return nav('/pluto')
               },600)
             }} className='active:scale-0 hover:scale-0 md:hover:scale-95 duration-1000 cursor-pointer border-2 border-cyan-400 rounded-[50%] w-72 h-72 md:w-96 md:h-96 text-center mt-1 py-10 md:py-20 text-3xl font-bold animate-pulse flex items-center flex-col'><img src={aibot} className='md:w-36 w-20 animate-bounce mt-10 md:mt-1'/><div className='animate-bounce text-[#7fffd4]'>Tap to chat!</div><div className='animate-bounce text-green-400 text-2xl font-extrabold mt-0'></div></div>
@@ -178,8 +180,9 @@ const Home = () => {
 
         </div>
 
-
-
+        <audio id='intro_audio'>
+      <source src={intro}></source>
+    </audio>
 
     </div>
   )

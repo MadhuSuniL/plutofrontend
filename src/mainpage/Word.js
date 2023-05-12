@@ -6,7 +6,7 @@ import sorry from '../images/sorry.gif'
 import { useState , useEffect, useRef } from 'react';
 import Typing from "./components/Typing";
 import Navbar from '../Navbar'
-import intro from '../audio/welcome.mp3'
+import click from '../audio/tone3.wav'
 
 
 const Word = () => {
@@ -26,8 +26,8 @@ const [index, setIndex] = useState(0)
 //auto scrolling
 const scroll =()=>{
   setTimeout(function(){
-    document.querySelectorAll('#img')[document.querySelectorAll('#img').length - 1].scrollIntoView({ behavior: 'smooth' })  
-  },30)
+    document.querySelectorAll('#key')[document.querySelectorAll('#key').length - 1].scrollIntoView({ behavior: 'smooth' })  
+  },10)
 }
 
 
@@ -98,9 +98,9 @@ useEffect(() => {
 
  const [input,setinput] = useState('')
 
- const handlevalue = event =>{
+ const handlevalue = (event) =>{
+    event.preventDefault()
     setinput(event.target.value)
-    // console.log(input);
     setLang(false)
 
  }
@@ -115,6 +115,7 @@ useEffect(() => {
 //  res state
 
 const [res , setres] = useState([])//{key:'',value:''}
+
 
 const handleinput = (f) => {
   f.preventDefault();
@@ -141,10 +142,13 @@ const handleinput = (f) => {
   .then(data => {
     res.push(data)
     setspin('logounrotate')
+    document.getElementById('click_audio').play()
     document.getElementById('input').value = ''
     document.getElementById('input').disabled = false
     setInputStyle('fixed pr-20 top-[90%] left-[2%] md:left-[15%] w-[93%] md:w-[70%] rounded-xl h-10 text-xl mx-1 pl-2 bg-slate-900 text-gray-500 border-2 border-white')
     setPlaceholder('Search more..')
+    scroll()
+
         
   })
   
@@ -202,11 +206,11 @@ const handleinput = (f) => {
 // typing value
 const final_res = res.map(
     obj => {
-  return  (<div id='res' key={obj.key} className='border-[0px] rounded-md text-white font-mono mx-2 mb-20 md:mx-auto p-2 border-white md:w-[70%]'>
+  return  (<div id='res' key={obj.id} className='border-[0px] rounded-md text-white font-mono mx-2 mb-20 md:mx-auto p-2 border-white md:w-[70%]'>
   {/* images */}
-  <div className='text-md'>
+  {obj.img != 'no-img' && <div className='text-md'>
   {obj.img != 'none' ? <img id='img' alt={"?"+obj.key} src={obj.img} className='w-77 m-2 mb-5 rounded-md border-2 border-white mx-auto'/> : <img id='img' src={sorry} className='w-77 m-2 mb-5 rounded-md border-2 border-white mx-auto'/>}
-  </div>
+  </div> }
   {/* question */}
   <div>
   <h1 id='key' className='font-bold mb-3 text-green-600 text-lg'>{obj.key}</h1>
@@ -218,10 +222,10 @@ const final_res = res.map(
   <div className='text-md'>
     {obj.value == "I am sorry i could't found the result. Please check spellings or try in another way(with new words)." ? <button disabled onClick={()=>{
   handlecopy()
-  navigator.clipboard.writeText(obj.value)
+  navigator.clipboard.writeText(obj.copy)
   }} className={ copy == 'Copy' ? 'hidden active:bg-green-500 float-right bg-cyan-400 text-gray-900 p-1 rounded-md border-2 border-cyan-900 font-bold hover:bg-white hover:text-black' : 'active:bg-green-500 float-right mt-10 bg-green-400 text-gray-900 p-1 rounded-md border-2 border-cyan-900 font-bold hover:bg-white hover:text-black'  }>{copy}</button> : <button onClick={()=>{
     handlecopy()
-    navigator.clipboard.writeText(obj.value)
+    navigator.clipboard.writeText(obj.copy)
     }} className={ copy == 'Copy' ? 'active:bg-green-500 mx-2 mt-4 text-sm float-right bg-cyan-400 text-gray-100 p-1 rounded-md border-2 border-cyan-900 font-bold hover:bg-white hover:text-black' : 'active:bg-green-500 float-right bg-green-400 text-gray-900 p-1 rounded-md border-2 border-cyan-900 m-4 font-bold hover:bg-white hover:text-black'  }>{copy}</button>}
   <br></br>
   <br></br>
@@ -229,9 +233,9 @@ const final_res = res.map(
   <div className='grid grid-cols-12'>
     
   <img src={logo} className='w-20 md:w-16 col-span-2 md:col-span-1 ml-[-13%] md:ml-[13%]'/>
-    
-  <div id='res' onLoad={scroll()} className='col-span-10 md:col-span-11'>
-  <Typing string={obj.value} speed={0} style={'text-left text-[13px]'} pipe = {false} late={0} />
+  {/* onLoad={scroll()} */}
+  <div id='res' className='col-span-10 md:col-span-11'>
+  <Typing string={obj.value} speed={0} style={'text-left text-[13px]'} pipe = {false} late={0}/>
   </div>
   </div>
   </div>
@@ -314,6 +318,14 @@ const final_res = res.map(
       return 'ಕನ್ನಡ'
     }
   }
+
+  const handleFocus = () => {
+    document.body.classList.add('no-scroll');
+  };
+
+  const handleBlur = () => {
+    document.body.classList.remove('no-scroll');
+  };
   
 
 
@@ -359,10 +371,11 @@ const final_res = res.map(
     {/* <Navbar/> */}
     {!lang ? <span className='flex flex-col cursor-pointer fixed top-[82.4%] active:animate-spin animate-bounce md:top-[80%] rounded-full border-0 border-gray-100 left-[84.7%] md:left-[82.6%]'><img onClick={()=>setLang(!lang)} src={lang1} className='w-10 md:w-10 rounded-full'/><h1 className='text-center'>{show_lang()}</h1></span> : <h1 onClick={()=>setLang(!lang)} className='w-10 md:w-12 fixed top-[82.4%] animate-pulse md:top-[80%] active:animate-spin text-2xl font-bold left-[88.7%] cursor-pointer md:left-[83.2%]'>X</h1>}
 
-    <audio autoPlay>
-      <source src={intro}></source>
+
+    <audio id='click_audio'>
+      <source src={click}></source>
     </audio>
-    
+
     {final_res}
     </div>
   )
