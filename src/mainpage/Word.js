@@ -85,7 +85,7 @@ useEffect(() => {
 }, [index3])
 
 
-  //const domain = 'http://localhost:8000/'
+  // const domain = 'http://localhost:8000/'
   const domain = 'https://plutoclarify.pythonanywhere.com/'
   const [copy,setcopy] = useState('Copy')
   const handlecopy = () =>{
@@ -370,7 +370,7 @@ const final_res = res.map(
     </center>
     </div>
     {/* <Navbar/> */}
-    {!lang ? <span className='flex flex-col cursor-pointer fixed top-[82.4%] active:animate-spin animate-bounce md:top-[80%] rounded-full border-0 border-gray-100 left-[84.7%] md:left-[82.6%]'><img onClick={()=>setLang(!lang)} src={lang1} className='w-10 md:w-10 rounded-full'/><h1 className='text-center'>{show_lang()}</h1></span> : <h1 onClick={()=>setLang(!lang)} className='w-10 md:w-12 fixed top-[82.4%] animate-pulse md:top-[80%] active:animate-spin text-2xl font-bold left-[88.7%] cursor-pointer md:left-[83.2%]'>X</h1>}
+    {!lang ? <span className='flex flex-col cursor-pointer fixed top-[80.4%] active:animate-spin animate-bounce md:top-[80%] rounded-full border-0 border-gray-100 left-[84.7%] md:left-[82.6%]'><img onClick={()=>setLang(!lang)} src={lang1} className='w-10 md:w-10 rounded-full'/><h1 className='text-center'>{show_lang()}</h1></span> : <h1 onClick={()=>setLang(!lang)} className='w-10 md:w-12 fixed top-[82.4%] animate-pulse md:top-[80%] active:animate-spin text-2xl font-bold left-[88.7%] cursor-pointer md:left-[83.2%]'>X</h1>}
 
 
     <audio id='click_audio'>
