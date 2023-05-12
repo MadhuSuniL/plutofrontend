@@ -85,8 +85,8 @@ useEffect(() => {
 }, [index3])
 
 
-  const domain = 'http://localhost:8000/'
-  // const domain = 'https://plutoclarify.pythonanywhere.com/'
+  //const domain = 'http://localhost:8000/'
+  const domain = 'https://plutoclarify.pythonanywhere.com/'
   const [copy,setcopy] = useState('Copy')
   const handlecopy = () =>{
   setcopy('Copied!')
@@ -98,8 +98,9 @@ useEffect(() => {
 
  const [input,setinput] = useState('')
 
- const handlevalue = (event) =>{
-    event.preventDefault()
+
+ const handlevalue = event =>{
+   event.preventDefault()
     setinput(event.target.value)
     setLang(false)
 
