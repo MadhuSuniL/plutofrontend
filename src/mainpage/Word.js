@@ -26,7 +26,14 @@ const Word = () => {
 
   // extra help
   const extra_help_strings = ["You can also explore these lines...!", "Feel free to look up these lines as well...!", "You might consider researching these lines too...!", "Don't forget to investigate these lines as well...!", "It's worth searching for information on these lines too...!", "Additionally, you can search for these lines...!", "These lines are also worth searching for...!", "You have the option to search about these lines too...!", "These lines are worth exploring as well...!", "You may want to search about these lines too...!", "It's recommended to search for these lines as well...!", "These lines can also be researched...!", "Feel free to investigate these lines as well...!", "Don't hesitate to search for these lines too...!", "These lines are worth looking into as well...!", "You might find it helpful to search about these lines too...!", "Additionally, you may search about these lines...!", "You have the choice to explore these lines as well...!", "These lines are also worth researching...!", "It's worth searching about these lines too...!"];
+  const [extra_help_index,setExtraHelp_Index] = useState(12)
 
+  function help_text(){
+    setExtraHelp_Index(Math.floor(Math.random() * extra_help_strings.length))
+  }
+  useEffect(()=>{
+    help_text()
+  },[])
 
   // typing logo 
   const [logotext, setText] = useState("")
@@ -161,6 +168,7 @@ const handleinput = (f) => {
     setPlaceholder('Search more..')
     scroll()
 
+
         
   })
   
@@ -256,7 +264,7 @@ const final_res = res.map(
   {/* extra */}
   {(obj.extra != null && obj.extra.length > 1) ? <div className='text-md text-cyan-400'>
   {/* {obj.extra} */}
-  <h1 className='mb-5 mt-0 text-lg font-bold'>{extra_help_strings[Math.floor(Math.random() * extra_help_strings.length)]}<br></br></h1>
+  <h1 className='mb-5 mt-0 text-lg font-bold'>{extra_help_strings[extra_help_index]}<br></br></h1>
   {obj.extra.map(item =>{
     return(
       <h1 key={item} id='content' onClick={()=>{
