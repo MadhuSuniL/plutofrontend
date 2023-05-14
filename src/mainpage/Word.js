@@ -21,7 +21,13 @@ const Word = () => {
   // wel_strings
   const wel_strings = [    "Hello! How can I assist you today?",    "Welcome back! What can I help you with?",    "Nice to see you again! What can I do for you today?",    "Hi there! How may I be of service?",    "Greetings! What brings you here today?",    "Welcome! I'm here to help. What do you need assistance with?",    "Hello, and welcome to PlutoKnows! How can I assist you?",    "Hey, great to have you here! What can I do to assist you today?",    "Hi, welcome, I am Pluto! What can I help you with?",    "Good to see you! How may I be of assistance?",    "Hi! It's great to have you here. How can I assist you?",    "Welcome back! What can I help you with today?",    "Greetings! I'm here to help. What can I do for you?",    "Hello, and welcome, I am Pluto. How may I be of assistance?",    "Nice to see you again! What can I help you with today?",    "Welcome to PlutoKnows, how can I assist you?",    "Hi there! I'm here to help you with anything you need. What can I do for you?",    "Hello and welcome! How can I make your experience better?",    "Welcome to PlutoKnows! What can I help you with today?",    "Hi, it's great to have you here! How can I assist you today?"]
 
-  
+  // help
+  const help_strings = [    "Please input alternative text options...!",    "Can you provide different words to type...?",    "We encourage varied word choices...!",    "Feel free to enter alternative text...!",    "Kindly use other words...!",    "Please type additional text...!",    "We appreciate diverse word selections...!",    "Could you enter some new words...?",    "Feel free to use different wording...!",    "We welcome alternative word input...!",    "Can you provide alternative text...?",    "Please type some other words...!",    "We encourage diverse word usage...!",    "Kindly input other word options...!",    "Please provide additional text...!",    "Can you type different words...?",    "We appreciate varied word input...!",    "Could you enter new words...?",    "Feel free to use alternative wording...!",    "We're open to different word suggestions...!"  ]
+
+  // extra help
+  const extra_help_strings = ["You can also explore these lines...!", "Feel free to look up these lines as well...!", "You might consider researching these lines too...!", "Don't forget to investigate these lines as well...!", "It's worth searching for information on these lines too...!", "Additionally, you can search for these lines...!", "These lines are also worth searching for...!", "You have the option to search about these lines too...!", "These lines are worth exploring as well...!", "You may want to search about these lines too...!", "It's recommended to search for these lines as well...!", "These lines can also be researched...!", "Feel free to investigate these lines as well...!", "Don't hesitate to search for these lines too...!", "These lines are worth looking into as well...!", "You might find it helpful to search about these lines too...!", "Additionally, you may search about these lines...!", "You have the choice to explore these lines as well...!", "These lines are also worth researching...!", "It's worth searching about these lines too...!"];
+
+
   // typing logo 
   const [logotext, setText] = useState("")
 const [fullText, setFullText] = useState('PlutoKnows')
@@ -250,7 +256,7 @@ const final_res = res.map(
   {/* extra */}
   {(obj.extra != null && obj.extra.length > 1) ? <div className='text-md text-cyan-400'>
   {/* {obj.extra} */}
-  <h1 className='mb-5 mt-0 text-lg font-bold'>You may search about these lines also...<br></br></h1>
+  <h1 className='mb-5 mt-0 text-lg font-bold'>{extra_help_strings[Math.floor(Math.random() * extra_help_strings.length)]}<br></br></h1>
   {obj.extra.map(item =>{
     return(
       <h1 key={item} id='content' onClick={()=>{
@@ -260,7 +266,7 @@ const final_res = res.map(
   })      
   }
   
-  </div> : <h1>Please type any other words...!</h1>}
+  </div> : <h1>{help_strings[Math.floor(Math.random() * help_strings.length)]}</h1>}
 
 
 
