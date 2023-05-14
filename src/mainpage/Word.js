@@ -17,6 +17,11 @@ const Word = () => {
   const [ln,setLn] = useState('en n')  
   const [placeholder_state,setPlaceholder] = useState('   Search.... "United States"')
   const [inputStyle,setInputStyle] = useState('fixed pr-20 top-[90%] left-[2%] md:left-[15%] w-[93%] md:w-[70%] rounded-xl h-10 text-xl mx-1 pl-2 bg-slate-900 text-gray-500 border-2 border-white')
+  
+  // wel_strings
+  const wel_strings = [    "Hello! How can I assist you today?",    "Welcome back! What can I help you with?",    "Nice to see you again! What can I do for you today?",    "Hi there! How may I be of service?",    "Greetings! What brings you here today?",    "Welcome! I'm here to help. What do you need assistance with?",    "Hello, and welcome to PlutoKnows! How can I assist you?",    "Hey, great to have you here! What can I do to assist you today?",    "Hi, welcome, I am Pluto! What can I help you with?",    "Good to see you! How may I be of assistance?",    "Hi! It's great to have you here. How can I assist you?",    "Welcome back! What can I help you with today?",    "Greetings! I'm here to help. What can I do for you?",    "Hello, and welcome, I am Pluto. How may I be of assistance?",    "Nice to see you again! What can I help you with today?",    "Welcome to PlutoKnows, how can I assist you?",    "Hi there! I'm here to help you with anything you need. What can I do for you?",    "Hello and welcome! How can I make your experience better?",    "Welcome to PlutoKnows! What can I help you with today?",    "Hi, it's great to have you here! How can I assist you today?"]
+
+  
   // typing logo 
   const [logotext, setText] = useState("")
 const [fullText, setFullText] = useState('PlutoKnows')
@@ -49,7 +54,7 @@ useEffect(() => {
 
 
 const [logotext2, setText2] = useState("")
-const [fullText2, setFullText2] = useState('Welcome ! My intelligent system can provide you with information on any single word , noun or sentence. Simply enter the word you want to know more about')
+const [fullText2, setFullText2] = useState(wel_strings[Math.floor(Math.random() * wel_strings.length)])
 const [index2, setIndex2] = useState(0)
 const [timetype , settimetype] = useState(1000)
 
@@ -370,7 +375,7 @@ const final_res = res.map(
     </center>
     </div>
     {/* <Navbar/> */}
-    {!lang ? <span className='flex flex-col cursor-pointer fixed top-[80.4%] active:animate-spin animate-bounce md:top-[80%] rounded-full border-0 border-gray-100 left-[84.7%] md:left-[82.6%]'><img onClick={()=>setLang(!lang)} src={lang1} className='w-10 md:w-10 rounded-full'/><h1 className='text-center'>{show_lang()}</h1></span> : <h1 onClick={()=>setLang(!lang)} className='w-10 md:w-12 fixed top-[82.4%] animate-pulse md:top-[80%] active:animate-spin text-2xl font-bold left-[88.7%] cursor-pointer md:left-[83.2%]'>X</h1>}
+    {/* {!lang ? <span className='flex flex-col cursor-pointer fixed top-[80.4%] active:animate-spin animate-bounce md:top-[80%] rounded-full border-0 border-gray-100 left-[84.7%] md:left-[82.6%]'><img onClick={()=>setLang(!lang)} src={lang1} className='w-10 md:w-10 rounded-full'/><h1 className='text-center'>{show_lang()}</h1></span> : <h1 onClick={()=>setLang(!lang)} className='w-10 md:w-12 fixed top-[82.4%] animate-pulse md:top-[80%] active:animate-spin text-2xl font-bold left-[88.7%] cursor-pointer md:left-[83.2%]'>X</h1>} */}
 
 
     <audio id='click_audio'>
